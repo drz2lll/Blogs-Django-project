@@ -1,0 +1,29 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}Вы успешно вышли с аккаунта{% endblock %}
+
+{% block content %}
+<h1 class="mb-4 text-center">Вы успешно вышли с аккаунта</h1>
+<a href="{% url 'user' %}">Войти в личный кабинет снова</a>
+<div class="row">
+    {% for post in news %}
+    <div class="col-md-6 mb-4">
+        <div class="card shadow-sm h-100">
+            <div class="card-body">
+                <h3 class="card-title">{{ post.title }}</h3>
+                <p class="card-text">{{ post.text }}</p>
+            </div>
+            <div class="card-footer text-muted">
+                {% if post.avtor %}
+                    Автор: {{ post.avtor }} | Дата: {{ post.data }}
+                {% else %}
+                    Автор: <b>ADMIN</b> | Дата: {{ post.data }}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <p class="text-center">Пока нет новостей.</p>
+    {% endfor %}
+</div>
+{% endblock %}

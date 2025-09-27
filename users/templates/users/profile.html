@@ -1,0 +1,39 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}Кабинет пользователя{% endblock %}
+
+{% block content %}
+<div class="container d-flex justify-content-center" style="margin-top: 50px;">
+    <div style="max-width: 600px; width: 100%; border: 1px solid #ddd; border-radius: 15px; background: linear-gradient(135deg, #f9f9f9, #ffffff); box-shadow: 0 6px 15px rgba(0,0,0,0.1); text-align: center; padding: 40px;">
+        
+        <!-- Фото профиля -->
+        <div style="margin-bottom: 25px;">
+            <img 
+                src="{% if user.profile.img %}{{ user.profile.img.url }}{% else %}/pictures/user_images/person.png{% endif %}" 
+                alt="Фото профиля" 
+                style="width: 150px; height: 150px; border-radius: 50%; border: 4px solid #007bff; object-fit: cover; box-shadow: 0 4px 12px rgba(0,0,0,0.2);"
+            />
+        </div>
+
+        <!-- Имя -->
+        <h2 style="margin: 0; font-size: 28px; font-weight: bold; color: #222;">
+            {{ user.username }}
+        </h2>
+
+        <!-- Email -->
+        <p style="margin: 12px 0 0; font-size: 18px; color: #555;">
+            <b>Email:</b> {{ user.email|default:"Не указан" }}
+        </p>
+    </div>
+</div>
+
+<!-- Форма редактирования профиля -->
+<div class="container" style="max-width: 600px; margin-top: 30px;">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ user_form.as_p }}
+        {{ profile_form.as_p }}
+        <button type="submit" class="btn btn-primary">Обновить</button>
+    </form>
+</div>
+{% endblock %}

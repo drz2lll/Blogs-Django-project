@@ -1,0 +1,38 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+    <div class="w-100" style="max-width: 600px;">
+        <h1 class="mb-5 text-center fw-bold" style="color:#4B0082;">{{ btn_text }}</h1>
+
+        <form method="post" class="p-5 bg-light rounded-4 shadow-lg">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-gradient btn-lg w-100" 
+                    style="background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%); color:white; font-weight:bold; margin-top: 20px;">
+                Добавить статью
+            </button>
+        </form>
+    </div>
+</div>
+
+<style>
+.btn-gradient:hover {
+    opacity: 0.9;
+    transition: opacity 0.3s;
+}
+form input, form textarea {
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-size: 1rem;
+}
+form textarea {
+    min-height: 150px;
+}
+</style>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}Удаление статьи{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-center align-items-center" style="min-height: 80vh; padding: 20px;">
+    <div class="w-100" style="max-width: 600px;">
+        <h1 class="mb-4 text-center" style="color:#dc3545;">Вы точно хотите удалить статью "{{ object.title }}"?</h1>
+        
+        <div class="card p-4 mb-4" style="border: 1px solid #ddd; border-radius: 8px;">
+            <h3>{{ object.title }}</h3>
+            <p>{{ object.text }}</p>
+            <p class="text-muted" style="font-size: 0.9rem;">
+                Автор: {{ object.avtor }} | Дата: {{ object.date|date:"d M Y H:i" }}
+            </p>
+        </div>
+
+        <form method="post" style="display: flex; flex-direction: column; gap: 10px;">
+            {% csrf_token %}
+            <button type="submit" class="btn" 
+                    style="background-color:#dc3545; color:white; padding: 10px; border-radius: 5px; font-weight: bold;">
+                Да,удалить
+            </button>
+            <a href="{% url 'contact' %}" class="btn" 
+            style="background-color:#6c757d; color:white; padding: 10px; border-radius: 5px; text-align:center;">
+                Отмена
+            </a>
+        </form>
+    </div>
+</div>
+
+<style>
+.card {
+    box-shadow: none;
+    background-color: #f8f9fa;
+}
+.btn:hover {
+    opacity: 0.9;
+    transition: 0.3s;
+}
+</style>
+{% endblock %}

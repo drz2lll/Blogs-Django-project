@@ -1,0 +1,35 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}Новости сайта{% endblock %}
+
+{% block content %}
+<h1 class="mb-4 text-center">Новости сайта</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+    <hr>
+    <p>Уже зарегистрированы? <a href="{% url 'user' %}">Войти в личный кабинет</a></p>
+</form>
+<div class="row">
+    {% for post in news %}
+    <div class="col-md-6 mb-4">
+        <div class="card shadow-sm h-100">
+            <div class="card-body">
+                <h3 class="card-title">{{ post.title }}</h3>
+                <p class="card-text">{{ post.text }}</p>
+            </div>
+            <div class="card-footer text-muted">
+                {% if post.avtor %}
+                    Автор: {{ post.avtor }} | Дата: {{ post.data }}
+                {% else %}
+                    Автор: <b>ADMIN</b> | Дата: {{ post.data }}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <p class="text-center">Пока нет новостей.</p>
+    {% endfor %}
+</div>
+{% endblock %}

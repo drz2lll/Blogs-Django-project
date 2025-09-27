@@ -1,0 +1,43 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}Главная страница{% endblock %}
+
+{% block content %}
+<div class="text-center mb-5">
+    <h1 class="display-4">Добро пожаловать на сайт!</h1>
+    <p class="lead">Здесь вы найдёте самые свежие новости, статьи и полезную информацию.</p>
+    <a href="/contact" class="btn btn-primary btn-lg mt-3">Перейти к новостям</a>
+</div>
+<div class="row">
+    <div class="col-md-4 mb-4">
+        <div class="card shadow-sm h-100">
+            <img src="https://picsum.photos/400/200?random=1" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Раздел 1</h5>
+                <p class="card-text">Краткое описание первого раздела. Здесь будет что-то полезное.</p>
+                <a href="#" class="btn btn-outline-primary">Подробнее</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card shadow-sm h-100">
+            <img src="https://picsum.photos/400/200?random=2" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Раздел 2</h5>
+                <p class="card-text">Описание второго раздела, чтобы заинтересовать пользователей.</p>
+                <a href="#" class="btn btn-outline-primary">Подробнее</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card shadow-sm h-100">
+            <img src="https://picsum.photos/400/200?random=3" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Раздел 3</h5>
+                <p class="card-text">Ещё один раздел, куда можно добавить полезную информацию.</p>
+                <a href="#" class="btn btn-outline-primary">Подробнее</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

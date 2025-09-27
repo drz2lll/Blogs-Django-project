@@ -1,0 +1,58 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}Новости сайта{% endblock %}
+
+{% block content %}
+<h1 class="mb-5 text-center fw-bold" style="color:#4B0082;">Новости сайта</h1>
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card mb-4 shadow-sm rounded-4">
+            <div class="card-body">
+                <h3 class="card-title fw-bold mb-3">{{ post.title }}</h3>
+                <p class="card-text" style="font-size: 1.05rem; line-height: 1.6;">{{ post.text }}</p>
+            </div>
+            <div class="card-footer d-flex align-items-center justify-content-between text-muted" style="font-size:0.9rem;">
+                <div class="d-flex align-items-center">
+                    {% if post.avtor and post.avtor.profile.img %}
+                        <img src="{{ post.avtor.profile.img.url }}" alt="{{ post.avtor }}" class="rounded-circle me-2" style="width: 40px; height: 40px; object-fit: cover;">
+                    {% else %}
+                        <img src="/pictures/user_images/person.png" alt="Default avatar" class="rounded-circle me-2" style="width: 40px; height: 40px; object-fit: cover;">
+                    {% endif %}
+                    {% if post.avtor %}
+                        Автор: <b>{{ post.avtor }}</b> | Дата: {{ post.data|date:"d M Y в H:i" }}
+                    {% else %}
+                        Автор: <b>ADMIN</b> | Дата: {{ post.data|date:"d M Y в H:i" }}
+                    {% endif %}
+                </div>
+                {% if post.avtor == user %}
+                    <div class="d-flex gap-2">
+                        <a href="{% url 'news_update' post.id %}" class="btn btn-sm btn-info fw-bold">Обновить</a>
+                        <a href="{% url 'news_delete' post.id %}" class="btn btn-sm btn-danger fw-bold">Удалить</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.card-title {
+    color: #333;
+}
+.card-text {
+    color: #555;
+}
+.card-footer img {
+    border: 2px solid #ddd;
+}
+.btn-info:hover {
+    background-color: #2176bd;
+    transition: 0.3s;
+}
+.btn-danger:hover {
+    background-color: #c82333;
+    transition: 0.3s;
+}
+</style>
+{% endblock %}
