@@ -4,6 +4,11 @@ from .models import News
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from django.core.mail import send_mail
+from users.forms import MessageForm
+from django.conf import settings
 
 def home(request):
     context = {
@@ -102,3 +107,27 @@ class UpdateNewsView(LoginRequiredMixin,  UserPassesTestMixin, UpdateView):
             return True
         
         return False
+    
+def send_message(request):
+    if request.method == "POST":
+        form = MessageForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            email = form.cleaned_data['email']
+            message_text = form.cleaned_data['message']
+
+            subject = f"Сообщение от {name}"
+            plain_message = f"От: {name} <{email}>\n\n{message_text}"
+            from_email = settings.EMAIL_HOST_USER
+            to = 'egorbabenkoboxer@gmail.com'  
+
+            send_mail(subject, plain_message, from_email, [to])
+
+            messages.success(request, "Сообщение отправлено!")
+            return redirect('message')
+        else:
+            messages.error(request, "Ошибка! Проверьте форму.")
+    else:
+        form = MessageForm()
+
+    return render(request, 'blog/message.html', {'form': form})

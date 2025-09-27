@@ -1,0 +1,47 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}Отправить сообщение{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-center mt-5" style="min-height: 50vh;">
+    <div class="card shadow-lg border-0" style="width: 900px; border-radius: 15px; padding: 20px; box-sizing: border-box;">
+
+        <div class="card-header bg-primary text-white text-center" style="border-top-left-radius: 15px; border-top-right-radius: 15px;">
+            <h3 class="mb-0">Отправить сообщение</h3>
+        </div>
+
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+
+                <div class="mb-3">
+                    <label for="name" class="form-label">Ваше имя</label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Введите имя" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="message" class="form-label">Сообщение</label>
+                    <textarea class="form-control" id="message" name="message" rows="6" placeholder="Введите сообщение" required></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100 mt-3">Отправить</button>
+            </form>
+        </div>       
+
+<style>
+input, textarea {
+    border-radius: 8px;
+    padding: 10px;
+}
+
+input:focus, textarea:focus {
+    border-color: #007bff;
+    outline: none;
+}
+</style>
+{% endblock %}

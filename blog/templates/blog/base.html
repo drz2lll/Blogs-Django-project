@@ -23,6 +23,9 @@
         <li class="nav-item">
           <a class="nav-link {% if request.path == '/contact/' %}active{% endif %}" href="/contact/">News</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link {% if request.path == '/message/' %}active{% endif %}" href="/message/">Contact</a>
+        </li>
       </ul>
 
       <div class="d-flex">
@@ -38,8 +41,8 @@
             </form>
         {% else %}
             <!-- Регистрация и вход для гостей -->
-            <a href="{% url 'reg' %}" class="btn btn-outline-warning me-2">Регистрация</a>
-            <a href="{% url 'user' %}" class="btn btn-outline-info">Войти</a>
+            <a href="{% url 'reg' %}" class="btn btn-warning me-2">Регистрация</a>
+            <a href="{% url 'user' %}" class="btn btn-info">Войти</a>
         {% endif %}
       </div>
     </div>

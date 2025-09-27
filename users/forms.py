@@ -91,3 +91,8 @@ class ProfileImageForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['img', 'gender', 'email_notifications']
+
+class MessageForm(forms.Form):
+    name = forms.CharField(max_length=100, label="Ваше имя")
+    email = forms.EmailField(label="Ваш email")
+    message = forms.CharField(widget=forms.Textarea, label="Сообщение")
